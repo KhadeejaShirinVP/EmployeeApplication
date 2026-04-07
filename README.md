@@ -1,44 +1,66 @@
-Employee API (.NET 8)
-📌 Project Overview
+**Features Implemented as Part of Learning**
 
-This is a simple Employee Management API built using ASP.NET Core Web API.
-It supports basic CRUD operations and is structured using clean architecture principles.
+📌 Project Title
+# Employee Management API
+
+📖 Description
+This is a .NET Web API project for managing employees with secure authentication and role-based authorization.
+The project follows a layered architecture and includes JWT authentication, validation, and global exception handling.
 
 🚀 Features
-Get all employees
-Get employee by ID
-Add new employee
-Update employee
-Delete employee
-Swagger UI integration
-🧱 Tech Stack
-.NET 8 Web API
-C#
-Swagger (Swashbuckle)
-Dependency Injection
-📁 Project Structure
+- Employee CRUD operations
+- JWT Authentication
+- Role-based Authorization (Admin/User)
+- User Registration & Login
+- Password Hashing using BCrypt
+- FluentValidation for input validation
+- Global Exception Handling
+- Standard API Response Model
+- Swagger API Documentation
 
-EmployeeApi/
-│
-├── Controllers/
-├── Models/
-├── Repository/
-├── Services/
-├── Program.cs
+🛠️ Tech Stack
+- .NET 8 Web API
+- Entity Framework Core
+- PostgreSQL
+- JWT Authentication
+- FluentValidation
+- BCrypt.Net
+- Swagger (Swashbuckle)
+
+📂 Project Structure
+Controllers/
+Services/
+Repository/
+Data/
+Models/
+DTOs/
+Common/
+Middleware/
+
+🔐 Authentication
+- Login to get JWT token
+- Use token in Swagger Authorize button:
+Bearer <your_token>
+
+📌 API Endpoints
+### Auth
+POST /api/auth/register
+POST /api/auth/login
+
+### Employees
+GET /api/employee
+GET /api/employee/{id}
+POST /api/Add employee   (Admin only)
+PUT /api/Update employee
+DELETE /api/Delete employee/{id}
 
 ▶️ How to Run
-Clone the repository:
-git clone https://github.com/KhadeejaShirinVP/EmployeeApplication.git
-Navigate to project:
-cd EmployeeApi
-Run the project:
-dotnet run
-Open Swagger:
-https://localhost:<port>/swagger
-🔗 API Endpoints
-Method	Endpoint	Description
-GET	/api/employee	Get all employees
-GET	/api/employee/{id}	Get employee by ID
-POST	/api/employee	Add new employee
-PUT	/api/employee	Update employee
-DELETE	/api/employee/{id}	Delete employee
+1. Clone the repository
+2. Configure PostgreSQL connection string in appsettings.json
+3. Run migrations:
+   dotnet ef database update
+4. Run the project:
+   dotnet run
+5. Open Swagger:
+   https://localhost:7093/swagger
+
