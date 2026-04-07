@@ -1,4 +1,5 @@
-﻿using EmployeeApi.Data;
+﻿using EmployeeApi.Common;
+using EmployeeApi.Data;
 using EmployeeApi.DTOs;
 using EmployeeApi.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -26,12 +27,22 @@ namespace EmployeeApi.Controllers
         public IActionResult Register(RegisterRequest request)
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password))
-                return BadRequest("Username and Password are required");
+                return BadRequest(new ApiResponse<string>
+                {
+                    Success = false,
+                    Message = "Username and Password are required",
+                    Data = null
+                });
 
             var existingUser = _context.Users.FirstOrDefault(u => u.Username == request.Username);
 
             if (existingUser != null)
-                return BadRequest("User already exists");
+                return BadRequest(new ApiResponse<string>
+                {
+                    Success = false,
+                    Message = "User already exists",
+                    Data = null
+                });
 
             var user = new User
             {
@@ -43,7 +54,13 @@ namespace EmployeeApi.Controllers
             _context.Users.Add(user);
             _context.SaveChanges();
 
-            return Ok("User registered successfully");
+            return Ok(new ApiResponse<string>
+            {
+                Success = true,
+                Message = "User registered successfully",
+                Data = null
+            });
+
         }
 
         [HttpPost("login")]
@@ -55,7 +72,12 @@ namespace EmployeeApi.Controllers
                 return Unauthorized();
 
             var token = GenerateToken(user);
-            return Ok(new { token });
+            return Ok(new ApiResponse<string>
+            {
+                Success = true,
+                Message = "Login successful",
+                Data = token
+            });
 
 
             ////testing
