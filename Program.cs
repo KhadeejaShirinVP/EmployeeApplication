@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using EmployeeApi.Models;
 using FluentValidation.AspNetCore;
+using EmployeeApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -113,6 +114,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 
 app.Run();

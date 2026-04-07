@@ -54,7 +54,7 @@ namespace EmployeeApi.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost]
+        [HttpPost("Add Employee")]
         public IActionResult AddEmployee(Employee employee)
         {
             _employeeService.Add(employee);
@@ -66,7 +66,7 @@ namespace EmployeeApi.Controllers
             });
         }
 
-        [HttpPut]
+        [HttpPut("Update Employee")]
         public IActionResult UpdateEmployee(Employee employee)
         {
             var existing = _employeeService.GetById(employee.Id);
@@ -90,7 +90,7 @@ namespace EmployeeApi.Controllers
             });
         }
         
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete Employee")]
         public IActionResult DeleteById(int id)
         {
             var existing = _employeeService.GetById(id);
